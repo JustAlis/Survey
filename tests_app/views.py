@@ -67,7 +67,6 @@ def survey_detail(request, slug):
 
 
 def question_detail(request, slug):
-    # дополнить m2m таблицу, при наличии ответом из формы если такой есть    
     answers_queryset = Answer.objects.select_related(
         'following_question'
     ).only(
@@ -129,8 +128,6 @@ def question_detail(request, slug):
     return render(request, 'tests_app/question_detail.html', {'question': question})
 
 
-
-#если вопрос последний, ссылка ответа без последующего вопроса ведёт сюда
 def survey_statistics(request, slug):
     survey = Survey.objects.filter(slug=slug).first()
     raw_statistics = sql_get_survey_statistics(survey.pk)
