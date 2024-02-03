@@ -1,0 +1,25 @@
+{% load static %} 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% if user.is_anonymous %}
+        <h1>Для прохождения опросов необходимо войти</h1>
+        <a href="{% url 'login' %}">
+            <button>Вход</button>
+        </a>
+        <a href="{% url 'register' %}">
+            <button>Регистрация</button>
+        </a>
+    {% else %}
+        <h3>Пользователь: {{user}}</h3>
+        <a href="{% url 'logout' %}">
+            <button>Выход</button>
+        </a>
+    {% endif %}
+    <a href="/">
+        <button>Главная страница</button>
+    </a>
+    {% block content %}
+    {% endblock %}
+</body>

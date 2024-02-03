@@ -1,0 +1,11 @@
+{% extends 'tests_app/base.html'   %}
+{% load static %}
+
+{% block content %}
+    <h1>Список опросов</h1>
+    {% for survey in surveys %}
+        <a href="{% url 'survey' survey.slug %}">
+            <h2>{{ survey.title }}</h2>
+        </a>
+    {% endfor %}
+{% endblock %}

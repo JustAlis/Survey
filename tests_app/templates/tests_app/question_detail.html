@@ -1,0 +1,40 @@
+{% extends 'tests_app/base.html'   %}
+{% load static %}
+
+{% block content %}
+    <h1>{{ question.text }}</h1>
+
+
+        <form  method="post" action="{% url 'question' question.slug %}">
+            {% csrf_token %}
+            {% for answer in question.answers.all %}
+            <div>
+                <input 
+                    required
+                    type="radio" 
+                    name="input" 
+                    id="{{answer.pk}}" 
+                    value="{{ answer.following_question.slug }},{{ answer.pk }}"
+                />
+                <label for="{{answer.pk}}">
+                    {{answer.text}}
+                </label>
+            </div>
+            {% endfor %}
+            <input
+                hidden 
+                name="question"
+                id="{{question.pk}}"
+                value="{{question.pk}}"
+            />
+            <input
+                hidden 
+                name="redirect_statistics"
+                id="{{question.survey.slug}}"
+                value="{{question.survey.slug}}"
+            />
+            <input type="submit" value="Ответить">
+        </form>  
+
+
+{% endblock %}

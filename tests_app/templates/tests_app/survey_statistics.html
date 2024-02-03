@@ -1,0 +1,43 @@
+{% extends 'tests_app/base.html'   %}
+{% load static %}
+
+{% block content %}
+    <h1>
+        Статистика опроса "{{statistics.title}}":
+    </h1>
+    <h2>
+        Всего участников: {{statistics.participants}}
+    </h2>
+    <h2>
+        Вопросы:
+    </h2>
+    {% for question in statistics.questions %}
+        <h3>
+            {{question.text}}
+        </h3>
+        <div>
+            Всего ответило на вопрос: {{question.amount_of_answers}}
+        </div>
+        <div>
+            Доля ответивших от общего кол-ва участников опроса: {{question.percent}}
+        </div>
+        <div>
+            Порядковый номер вопроса: {{question.rank}}
+        </div>
+        <h4>
+            Ответы:
+        </h4>
+        {% for answer in question.answers %}
+            <h4>
+                {{answer.text}}
+            </h4>
+            <div>
+                Количество участников выбравших этот вариант: {{answer.answered_amount}}
+            </div>
+            <div>
+                Доля ответивших от общего кол-ва отвечавших на этот вопрос: {{answer.percent}}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}
